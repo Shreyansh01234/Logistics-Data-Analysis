@@ -398,7 +398,7 @@ Week_1_Logistics_Data_Analysis/
     └── Week_1_Strategic_Planning_Logistics_Data_Analysis.docx
 🛠️ How to Run
 1. Clone the repository
-git clone <YOUR_REPOSITORY_URL>
+git clone < https://shreyansh01234.github.io/Week-1-Logistics-Data-Analysis/>
 2. Navigate to the project
 cd Week-1-Logistics-Data-Analysis
 3. Install dependencies
