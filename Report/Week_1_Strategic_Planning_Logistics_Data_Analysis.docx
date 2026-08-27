@@ -1,0 +1,619 @@
+# Strategic Planning and Data Exploration in Logistics
+
+## Data-Driven Logistics Delivery Delay and Risk Analysis
+
+### 1. Introduction and Background
+
+Modern logistics and supply chain operations generate large volumes of data from vehicles, warehouses, suppliers, transportation networks, customer orders, and monitoring systems. Effective use of this data can help organizations improve delivery performance, reduce operational costs, manage risks, and allocate resources more efficiently.
+
+One of the major challenges in logistics is maintaining reliable delivery schedules while controlling transportation costs and operational risks. Delivery performance can be influenced by several factors, including traffic congestion, weather conditions, route risk, loading and unloading time, supplier reliability, lead time, customs clearance, fuel consumption, and potential disruptions.
+
+This project proposes a data-driven analytical framework for understanding and improving logistics delivery performance. The analysis uses a publicly available dynamic supply chain logistics dataset containing 32,065 records and 26 variables. The dataset provides operational information related to transportation, inventory, delivery delays, supplier reliability, route risk, weather, shipping costs, and other logistics factors.
+
+The proposed approach combines descriptive analytics, exploratory data analysis, predictive modeling, and clustering techniques using Python. The primary focus is to identify factors associated with delivery-time deviation, assess logistics risk, and explore how data science can support better logistics planning and decision-making.
+
+The project is designed as a strategic planning and data exploration exercise. Therefore, the objective is not only to build predictive models but also to establish an end-to-end analytical roadmap that can later be extended into a complete logistics optimization system.
+
+
+## 2. Problem Statement
+
+Logistics organizations must continuously balance delivery speed, transportation cost, inventory availability, and operational risk. Delays can occur because of traffic congestion, adverse weather, route conditions, loading and unloading activities, supplier lead times, customs clearance, and unexpected disruptions.
+
+Without systematic analysis, it can be difficult for logistics managers to identify the factors most strongly associated with delivery delays or determine which operations require greater attention.
+
+The problem addressed in this project is:
+
+**How can historical logistics and supply chain data be analyzed using Python and data science techniques to identify factors associated with delivery delays, assess operational risk, and support more effective logistics planning and resource allocation?**
+
+The proposed solution uses exploratory data analysis to understand operational patterns, regression to investigate delivery-time deviation prediction, classification to analyze logistics risk categories, and clustering to identify groups of logistics operations with similar characteristics.
+
+
+## 3. Project Objectives
+
+The main objectives of the project are:
+
+1. To explore and understand the structure and characteristics of the logistics dataset.
+
+2. To identify important operational factors associated with delivery-time deviation.
+
+3. To calculate and monitor key logistics performance indicators such as delivery-time deviation, ETA variation, delay probability, shipping cost, and order fulfillment.
+
+4. To perform data cleaning, validation, exploratory data analysis, and correlation analysis using Python.
+
+5. To investigate the feasibility of predicting delivery-time deviation using regression techniques.
+
+6. To classify logistics operations according to their risk levels using machine learning classification techniques.
+
+7. To apply clustering to identify groups of logistics operations with similar operational characteristics.
+
+8. To propose an optimization framework for reducing transportation costs, delays, and operational risks.
+
+9. To develop an end-to-end analytical roadmap that can support data-driven logistics decision-making.
+
+10. To identify limitations in the current dataset and propose future improvements for a production-level logistics analytics system.
+
+
+## 4. Logistics Scenario
+
+The proposed scenario represents a logistics company responsible for transporting goods from warehouses and suppliers to different destinations. The company manages multiple operational factors, including vehicle movement, transportation costs, inventory levels, supplier performance, route conditions, weather conditions, loading and unloading activities, and delivery schedules.
+
+The company has observed that some shipments experience significant delivery-time deviations while others are completed within the expected time. In addition, certain routes and operational conditions may have higher risk levels and greater disruption probabilities.
+
+The organization wants to use historical logistics data to answer several business questions:
+
+* Which operational factors are associated with delivery delays?
+* What conditions are associated with higher logistics risk?
+* Can delivery-time deviation be estimated using historical operational information?
+* Can logistics operations be grouped into meaningful segments?
+* How can transportation resources and routes be allocated more efficiently?
+* How can the company reduce delays and operational costs while maintaining reliable deliveries?
+
+The proposed analytics system will analyze historical logistics records and generate insights that can assist logistics managers in route planning, risk monitoring, resource allocation, and operational improvement.
+
+
+## 5. Key Performance Indicators (KPIs)
+
+To evaluate logistics performance systematically, the project will monitor the following key performance indicators:
+
+| KPI                     | Dataset Variable           | Purpose                                                                |
+| ----------------------- | -------------------------- | ---------------------------------------------------------------------- |
+| Delivery Time Deviation | `delivery_time_deviation`  | Measures deviation from the expected delivery schedule.                |
+| ETA Variation           | `eta_variation_hours`      | Measures variation in estimated arrival time.                          |
+| Delay Probability       | `delay_probability`        | Indicates the estimated likelihood of delivery delay.                  |
+| Shipping Cost           | `shipping_costs`           | Measures the transportation cost associated with logistics operations. |
+| Order Fulfillment       | `order_fulfillment_status` | Measures the effectiveness of fulfilling logistics orders.             |
+
+### KPI Formulas
+
+**On-Time Delivery Performance**
+
+On-Time Delivery Rate = (On-Time Deliveries / Total Deliveries) × 100
+
+**Average Delivery Time Deviation**
+
+Average Delivery Deviation = Sum of Delivery Time Deviations / Total Shipments
+
+**Average Shipping Cost**
+
+Average Shipping Cost = Total Shipping Cost / Total Shipments
+
+These KPIs provide a combination of delivery-performance, risk, cost, and fulfillment perspectives and can be used by logistics managers to monitor operational efficiency.
+
+
+## 6. Literature and Data Research
+
+Data science has increasingly become an important component of modern logistics and supply chain management. Historical operational data can be used to understand demand patterns, identify delivery risks, predict delays, and support route and resource optimization.
+
+Research in last-mile logistics demonstrates that historical route data can be used to investigate routing decisions and improve delivery planning. The Amazon Last Mile Routing Research Challenge provides historical route data for research into last-mile delivery routing and machine learning applications.
+
+Recent research has also explored the comparison between planned and actual delivery routes. Such datasets can help researchers understand deviations from planned routes and investigate operational factors affecting routing performance.
+
+Data-driven inventory routing research further demonstrates that demand prediction and routing decisions can be integrated to improve logistics operations. This highlights the importance of combining predictive analytics with optimization rather than treating individual supply chain activities independently.
+
+For this project, a publicly available dynamic supply chain logistics dataset was selected. The dataset contains 32,065 records and 26 variables covering transportation, inventory, supplier reliability, shipping costs, lead time, weather, route risk, delivery probability, and delivery-time deviation.
+
+The available variables make the dataset suitable for exploratory analysis and for demonstrating several data science techniques, including correlation analysis, regression, classification, and clustering.
+
+The research therefore supports the proposed analytical approach of combining descriptive, predictive, and segmentation techniques to support logistics decision-making.
+
+
+## 7. Dataset Description
+
+The project uses the `dynamic_supply_chain_logistics_dataset.csv` dataset obtained from a publicly available Kaggle source.
+
+### Dataset Overview
+
+* **Total records:** 32,065
+* **Total variables:** 26
+* **Missing values:** 0
+* **Duplicate records:** 0
+* **Risk categories:** 3
+* **Timestamp records:** 32,065 unique observations
+
+### Major Variable Groups
+
+**Transportation and Vehicle Variables**
+
+* Vehicle GPS latitude
+* Vehicle GPS longitude
+* Fuel consumption rate
+* Traffic congestion level
+
+**Warehouse and Operations**
+
+* Warehouse inventory level
+* Loading and unloading time
+* Handling equipment availability
+* Order fulfillment status
+
+**Environmental Variables**
+
+* Weather condition severity
+* Port congestion level
+* IoT temperature
+
+**Cost and Supplier Variables**
+
+* Shipping costs
+* Supplier reliability score
+* Lead time
+* Historical demand
+
+**Risk and Delivery Variables**
+
+* Route risk level
+* Customs clearance time
+* Driver behavior score
+* Fatigue monitoring score
+* Disruption likelihood score
+* Delay probability
+* Risk classification
+* Delivery time deviation
+
+Initial data exploration showed that all 26 variables contain complete observations. No duplicate records were identified, which provides a clean starting point for exploratory analysis and modeling.
+
+
+## 8. Data Science Methodologies
+
+The proposed project combines multiple data science techniques to address different logistics questions.
+
+### 8.1 Exploratory Data Analysis
+
+Exploratory Data Analysis (EDA) will be used to understand the distribution of logistics variables and identify relationships between operational factors and delivery performance.
+
+Examples include:
+
+* Distribution of logistics risk categories
+* Average delivery-time deviation
+* Traffic congestion versus delivery delay
+* Route risk versus delivery delay
+* Weather severity versus delivery delay
+* Correlation between numerical variables
+
+### 8.2 Correlation Analysis
+
+Correlation analysis will be used to identify numerical variables associated with `delivery_time_deviation`.
+
+This can help identify potentially important operational factors for subsequent predictive modeling.
+
+### 8.3 Regression
+
+Regression will be used to investigate whether delivery-time deviation can be predicted from operational variables.
+
+The proposed target variable is:
+
+`delivery_time_deviation`
+
+Potential explanatory variables include traffic congestion, weather severity, loading and unloading time, lead time, shipping costs, route risk, customs clearance time, and disruption likelihood.
+
+A Random Forest Regressor is proposed because it can model nonlinear relationships between multiple operational variables.
+
+### 8.4 Classification
+
+Classification will be used to investigate logistics risk categories.
+
+Target variable:
+
+`risk_classification`
+
+The three observed categories are:
+
+* High Risk
+* Moderate Risk
+* Low Risk
+
+A Random Forest Classifier can be used as an initial classification model.
+
+However, the observed perfect classification performance requires additional validation because some input variables may be closely related to the construction of the risk label. Feature leakage should therefore be assessed before real-world deployment.
+
+### 8.5 Clustering
+
+K-Means clustering will be used to segment logistics operations based on characteristics such as:
+
+* Shipping costs
+* Lead time
+* Historical demand
+* Traffic congestion
+* Route risk
+* Delay probability
+
+The objective is to identify groups of logistics operations with similar characteristics and potentially different operational requirements.
+
+### 8.6 Optimization
+
+A future optimization component can formulate route and resource allocation as an optimization problem.
+
+The proposed objective is to minimize:
+
+**Total Transportation Cost + Delay Penalty + Risk Penalty**
+
+Subject to constraints such as:
+
+* Vehicle capacity
+* Vehicle availability
+* Delivery time windows
+* Route distance
+* Warehouse capacity
+* Operational constraints
+
+This optimization layer can be developed in a later phase after reliable predictive insights are established.
+
+
+## 9. Strategic Analysis Roadmap
+
+The proposed end-to-end analytical workflow consists of the following stages:
+
+### Stage 1 — Data Collection
+
+Obtain historical logistics data containing transportation, inventory, supplier, environmental, cost, and delivery information.
+
+### Stage 2 — Data Validation
+
+Check:
+
+* Dataset dimensions
+* Data types
+* Missing values
+* Duplicate records
+* Invalid values
+* Timestamp consistency
+
+### Stage 3 — Data Cleaning
+
+Handle missing values if present, remove duplicate observations, convert timestamps into appropriate datetime formats, and validate numerical ranges.
+
+### Stage 4 — Exploratory Data Analysis
+
+Analyze distributions, averages, relationships, and trends using statistical summaries and visualizations.
+
+### Stage 5 — KPI Analysis
+
+Calculate key logistics performance indicators related to delivery deviation, ETA variation, delay probability, shipping costs, and fulfillment.
+
+### Stage 6 — Feature Engineering
+
+Create useful analytical features such as time-based features, risk indicators, operational categories, and standardized numerical variables where required.
+
+### Stage 7 — Predictive Modeling
+
+Develop:
+
+* Regression model for delivery-time deviation
+* Classification model for logistics risk
+
+### Stage 8 — Clustering
+
+Segment logistics operations into groups with similar cost, demand, risk, traffic, and lead-time characteristics.
+
+### Stage 9 — Optimization
+
+Use analytical outputs to propose improved route, resource, and inventory allocation strategies.
+
+### Stage 10 — Evaluation
+
+Evaluate model performance using appropriate metrics such as MAE, RMSE, R², accuracy, precision, recall, and F1-score.
+
+### Stage 11 — Business Recommendations
+
+Translate analytical findings into practical recommendations for logistics managers.
+
+### Stage 12 — Decision Support
+
+Use the final insights to support proactive risk management, delivery planning, resource allocation, and cost control.
+
+
+## 10. Python Implementation Approach
+
+Python will be used as the primary analytical programming language because of its extensive data science and machine learning ecosystem.
+
+The proposed implementation uses:
+
+* Pandas for data manipulation
+* NumPy for numerical operations
+* Matplotlib for visualization
+* Scikit-learn for machine learning
+* Standard Python libraries for data processing
+
+### Dataset Loading
+
+```python
+import pandas as pd
+
+df = pd.read_csv("dynamic_supply_chain_logistics_dataset.csv")
+
+print(df.shape)
+print(df.head())
+```
+
+### Data Quality Check
+
+```python
+print(df.isnull().sum())
+print(df.duplicated().sum())
+print(df.dtypes)
+```
+
+### Correlation Analysis
+
+```python
+numeric_df = df.select_dtypes(include="number")
+
+correlation = (
+    numeric_df.corr()["delivery_time_deviation"]
+    .sort_values(ascending=False)
+)
+
+print(correlation)
+```
+
+### Regression
+
+```python
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestRegressor
+
+X = df[features]
+y = df["delivery_time_deviation"]
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.20, random_state=42
+)
+
+model = RandomForestRegressor(
+    n_estimators=100,
+    random_state=42
+)
+
+model.fit(X_train, y_train)
+
+predictions = model.predict(X_test)
+```
+
+### Classification
+
+```python
+from sklearn.ensemble import RandomForestClassifier
+
+classifier = RandomForestClassifier(
+    n_estimators=100,
+    random_state=42
+)
+
+classifier.fit(X_train, y_train)
+
+predictions = classifier.predict(X_test)
+```
+
+### Clustering
+
+```python
+from sklearn.preprocessing import StandardScaler
+from sklearn.cluster import KMeans
+
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+kmeans = KMeans(
+    n_clusters=3,
+    random_state=42,
+    n_init=10
+)
+
+clusters = kmeans.fit_predict(X_scaled)
+```
+
+These code snippets illustrate the proposed analytical workflow and demonstrate how Python can be used to transform raw logistics data into analytical insights.
+
+
+## 11. Initial Analytical Results
+
+The initial analysis was performed using Python on the selected logistics dataset containing 32,065 records and 26 variables.
+
+### 11.1 Data Quality Results
+
+The initial data exploration produced the following results:
+
+* Total records: 32,065
+* Total variables: 26
+* Missing values: 0
+* Duplicate records: 0
+* Risk classification categories: 3
+
+The absence of missing values and duplicate records provided a suitable starting point for exploratory analysis and machine learning experimentation.
+
+### 11.2 Regression Results
+
+A Random Forest Regression model was developed to investigate the feasibility of predicting `delivery_time_deviation`.
+
+The model produced the following results:
+
+| Evaluation Metric              |      Result |
+| ------------------------------ | ----------: |
+| Mean Absolute Error (MAE)      | 3.725 hours |
+| Root Mean Squared Error (RMSE) | 4.182 hours |
+| R² Score                       |      -0.014 |
+
+The negative R² score indicates that the initial regression model had limited predictive capability for delivery-time deviation. This suggests that the currently available operational variables may not sufficiently explain the variation in delivery-time deviation.
+
+The result should therefore be considered an initial baseline rather than a production-ready prediction model. Future work should investigate additional features, temporal patterns, non-linear relationships, feature engineering, and alternative modeling techniques.
+
+### 11.3 Risk Classification Results
+
+A Random Forest Classification model was developed to classify logistics operations into High Risk, Moderate Risk, and Low Risk categories.
+
+The initial model achieved:
+
+**Accuracy: 100%**
+
+The classification report also showed precision, recall, and F1-score of 1.00 for all three observed classes in the test set.
+
+However, this unusually high performance requires careful interpretation. Several variables used as model inputs, such as delay probability, disruption likelihood, and route risk, may be strongly related to the process used to construct the risk classification label. This creates a potential risk of target leakage or target-derived information.
+
+Therefore, the 100% accuracy should not be interpreted as evidence of perfect real-world predictive performance. A future implementation should perform feature leakage analysis, remove potentially target-derived variables, and validate the model on independent data.
+
+### 11.4 Clustering Analysis
+
+K-Means clustering was proposed to segment logistics operations according to shipping cost, lead time, historical demand, traffic congestion, route risk, and delay probability.
+
+The objective of clustering is to identify groups of logistics operations with similar operational characteristics. These segments could later be used to develop differentiated strategies for high-risk, high-cost, high-demand, or relatively efficient logistics operations.
+
+The clustering results will be treated as an exploratory segmentation rather than a final operational classification. Further analysis can determine the most meaningful number of clusters using methods such as the elbow method or silhouette analysis.
+
+---
+
+## 12. Expected Business Outcomes
+
+The proposed analytical framework is expected to provide the following outcomes:
+
+### 12.1 Improved Delivery Monitoring
+
+The analysis can help logistics managers monitor delivery-time deviation and ETA variation and identify operational conditions associated with delays.
+
+### 12.2 Early Risk Identification
+
+Risk-related analysis can help identify logistics operations that require additional monitoring or intervention.
+
+### 12.3 Better Resource Allocation
+
+Insights from demand, inventory, route risk, and operational conditions can support better allocation of vehicles, warehouse resources, and delivery capacity.
+
+### 12.4 Cost Management
+
+Analysis of shipping costs, fuel consumption, and route-related factors can help identify opportunities for transportation cost reduction.
+
+### 12.5 Improved Operational Planning
+
+Predictive analytics can support proactive planning rather than relying entirely on reactive responses after delays occur.
+
+### 12.6 Logistics Segmentation
+
+Clustering can identify groups of operations with similar characteristics, allowing managers to apply different strategies to different operational segments.
+
+---
+
+## 13. Business Impact and Decision-Making
+
+The ultimate purpose of the proposed analytics system is to convert raw logistics data into actionable business intelligence.
+
+The system can support logistics managers in making decisions such as:
+
+* Which routes require additional monitoring?
+* Which shipments have a higher probability of delay?
+* Which operational factors are associated with delivery deviations?
+* Where can transportation costs potentially be reduced?
+* Which suppliers may require performance monitoring?
+* Which logistics operations have similar risk and cost characteristics?
+* Where should limited transportation resources be allocated?
+
+The proposed approach can shift logistics management from a reactive model toward a more data-driven and proactive decision-making process.
+
+For example, if future analysis identifies that certain combinations of traffic congestion, route risk, and loading time are consistently associated with delivery delays, managers can take preventive action by adjusting schedules, selecting alternative routes, or allocating additional resources.
+
+Similarly, clustering results can help the organization create differentiated operational strategies instead of applying the same strategy to every shipment or route.
+
+---
+
+## 14. Limitations and Future Scope
+
+Although the dataset provides a useful foundation for logistics analysis, several limitations should be considered.
+
+### 14.1 Dataset Limitations
+
+The analysis is based on a publicly available dataset and may not represent the full complexity of a real logistics organization's operations.
+
+### 14.2 Regression Performance
+
+The initial regression model produced a negative R² score, indicating that the selected variables did not adequately predict delivery-time deviation. Future work should investigate additional features and alternative algorithms.
+
+### 14.3 Potential Target Leakage
+
+The perfect classification accuracy indicates that some predictor variables may be closely connected to the construction of the risk classification label. Future modeling should perform detailed feature leakage analysis.
+
+### 14.4 Limited Real-Time Information
+
+A production logistics system would ideally integrate real-time GPS, traffic, weather, warehouse, and vehicle information.
+
+### 14.5 Future Machine Learning Improvements
+
+Future work could evaluate:
+
+* Gradient Boosting
+* XGBoost
+* LightGBM
+* Random Forest
+* Neural Networks
+* Time-series forecasting
+
+depending on the availability and quality of additional data.
+
+### 14.6 Optimization Extension
+
+A future version can integrate predictive results with Vehicle Routing Problem (VRP) or Mixed Integer Linear Programming (MILP) techniques to optimize routes, vehicle allocation, and delivery schedules.
+
+### 14.7 Dashboard Development
+
+The final system could be extended into a Power BI, Tableau, or Python-based dashboard showing:
+
+* Delivery performance
+* Risk distribution
+* Cost trends
+* Route risk
+* Delay probability
+* Inventory indicators
+* Model predictions
+
+---
+
+## 15. Conclusion
+
+This project presents a strategic data science framework for analyzing logistics delivery performance and operational risk.
+
+The analysis began with systematic dataset exploration and validation. The selected dataset contains 32,065 records and 26 variables, with no missing values or duplicate records identified during the initial data-quality assessment.
+
+Exploratory analysis provides a foundation for understanding the relationships among transportation, inventory, environmental, supplier, cost, and delivery variables. Machine learning techniques were then considered for predictive and segmentation tasks.
+
+The initial Random Forest regression model produced an MAE of approximately 3.725 hours, an RMSE of approximately 4.182 hours, and an R² score of approximately -0.014. These results indicate that the initial feature set requires further improvement before reliable delivery-time prediction can be achieved.
+
+The initial classification model achieved 100% accuracy; however, this result requires additional validation because some predictors may contain information closely related to the risk classification label. This demonstrates the importance of model validation and feature leakage analysis in practical data science projects.
+
+K-Means clustering provides an additional approach for identifying groups of logistics operations with similar cost, demand, traffic, risk, and delay characteristics.
+
+Overall, the proposed framework demonstrates how data science can support logistics organizations in understanding operational problems, monitoring key performance indicators, identifying risks, improving resource allocation, and developing future optimization systems. With additional real-time data and stronger predictive models, this framework could be extended into a practical logistics decision-support system.
+
+---
+
+## 16. References
+
+1. Kaggle. *Dynamic Supply Chain Logistics Dataset*. Publicly available dataset used for exploratory and analytical purposes.
+
+2. Amazon Web Services. *Amazon Last Mile Routing Research Challenge Dataset*. Public research dataset supporting research into last-mile delivery routing and optimization.
+
+3. Transportation Science. Research literature on data-driven inventory routing and predictive optimization in supply chain management.
+
+4. Scikit-learn Documentation. *Machine Learning in Python*. Documentation for regression, classification, clustering, model evaluation, and preprocessing techniques.
+
+5. McKinney, W. *Python for Data Analysis*. O'Reilly Media. Reference for Python-based data analysis and manipulation.
+
+6. Python Software Foundation. *Python Documentation*. Reference for Python programming and data-processing workflows.
+
+
